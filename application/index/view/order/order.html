@@ -1,0 +1,158 @@
+{include file='layout/header2'}
+<!-- ============================================================= HEADER : END ============================================================= -->		<!-- ========================================= CONTENT ========================================= -->
+<form id="form_data" action="{:url('Order/order')}" method="post">
+<section id="checkout-page">
+    <div class="container">
+        <div class="col-xs-12 no-margin">
+            <!--<section id="shipping-address" style="margin-bottom:100px;margin-top:-10px">-->
+                <!--<h2 class="border h1">收货地址</h2>-->
+                    <!--<a href="javascript:void(0);" id="createlink">新建联系人</a>-->
+
+                    <!--<div class="row field-row" style="margin-top:10px">-->
+                        <!--<div class="col-xs-12">-->
+                            <!--<input class="le-radio big address" type="radio" name="address" value="" checked = "checked"/>厦门市思明区福源大厦-->
+                            <!--<a class="simple-link bold" href="#"></a>-->
+                        <!--</div>-->
+                        <!--<a style="margin-left:45px" href="#">删除</a>-->
+                    <!--</div>-->
+					<!--&lt;!&ndash; /.field-row &ndash;&gt;-->
+            <!--</section>&lt;!&ndash; /#shipping-address &ndash;&gt;-->
+            
+            <div class="billing-address" style="display:block;">
+                <h2 class="border h1">收货地址</h2>
+                    <div class="row field-row">
+                        <div class="col-xs-12 col-sm-6">
+                            <label>姓名*</label>
+                            <input class="le-input" name="shr_name" >
+                        </div>
+                    </div><!-- /.field-row -->
+
+                    <div class="row field-row">
+                        <div class="col-xs-12 col-sm-6">
+                            <label>地址*</label>
+                            <input class="le-input" data-placeholder="例如：厦门市思明区福源大厦9楼" name="shr_address" >
+                        </div>
+                    </div><!-- /.field-row -->
+
+                    <div class="row field-row">
+                        <div class="col-xs-12 col-sm-4">
+                            <label>联系电话*</label>
+                            <input class="le-input" name="shr_tel" >
+                        </div>
+                    </div>
+
+                    <!--<div class="place-order-button">-->
+                        <!--<button class="le-button small" >保存</button>-->
+                    <!--</div>&lt;!&ndash; /.place-order-button &ndash;&gt;-->
+            </div><!-- /.billing-address -->
+            <section id="your-order">
+                <h2 class="border h1">您的订单详情</h2>
+                    {foreach $order_goods_data as $k=>$v}
+                    <div class="row no-margin order-item">
+                        <div class="col-xs-12 col-sm-1 no-margin">
+                        <a href="javascript:void(0);" class="qty">{$v.num}x</a>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-9 ">
+
+                        <div class="title">
+
+                            <a href="#" class="thumb-holder">
+                                <img width="150px" height="150px" class="lazy" alt="" src="{$v.small_pic}" />
+                            </a>
+                            <a style="margin-left:50px" href="{:url('Goods/lst',['id'=>$v.id])}">{$v.goods_name}</a></div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-2 no-margin">
+                            <div class="price">￥ <span class="order_goods_price">{if $v.is_cx == 1}{$v.cx_price * $v.num}{else/}{$v.price * $v.num}{/if}</span></div>
+                        </div>
+                    </div><!-- /.order-item -->
+                    {/foreach}
+            </section><!-- /#your-order -->
+            <input type="hidden" name="addressid" value>
+            <div id="total-area" class="row no-margin">
+                <div class="col-xs-12 col-lg-4 col-lg-offset-8 no-margin-right">
+                    <div id="subtotal-holder">
+                        <ul class="tabled-data inverse-bold no-border">
+                            <li>
+                                <label>商品总价</label>
+                                <div style="width:100%;text-align:right" id="total" class="value">￥ <span id="all_goods_price">0</span></div>
+                            </li>
+                            <li>
+                                <label>选择快递</label>
+                                <div style="width:100%;text-align:right" class="value">
+                                    <div class="radio-group">
+                                        <input class="le-radio express" type="radio" name="express" value="申通" data="10"> <div class="radio-label bold">申通快递<span class="bold"> ￥ 10</span></div><br>
+                                        <input class="le-radio express" type="radio" name="express" value="顺丰" data="10" checked> <div class="radio-label bold">顺丰快递<span class="bold"> ￥ 10</span></div><br>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul><!-- /.tabled-data -->
+
+                        <ul id="total-field" class="tabled-data inverse-bold ">
+                            <li>
+                                <label>订单总额</label>
+                                <div class="value" style="width:100%;text-align:right" id="ototal">￥ <span id="all_order_price">0</span></div>
+                            </li>
+                        </ul><!-- /.tabled-data -->
+
+                    </div><!-- /#subtotal-holder -->
+                </div><!-- /.col -->
+            </div><!-- /#total-area -->
+
+            <div id="payment-method-options">
+                    
+                    <div class="payment-method-option">
+                        <!--<input class="le-radio" type="radio" name="pay_method" value="支付宝" checked>-->
+                        <!--<div class="radio-label bold ">支付宝支付</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                        <input class="le-radio" type="radio" name="pay_method" value="微信" checked>
+                        <div class="radio-label bold ">微信支付</div>
+                    </div><!-- /.payment-method-option -->
+                    
+            </div><!-- /#payment-method-options -->
+            
+            <div class="place-order-button">
+                <button onclick="$('#form_data').submit()" class="le-button big">确认订单</button>
+            </div><!-- /.place-order-button -->
+
+        </div><!-- /.col -->
+    </div><!-- /.container -->    
+</section><!-- /#checkout-page -->
+</form>
+<!-- ========================================= CONTENT : END ========================================= -->		
+<!-- ============================================================= FOOTER ============================================================= --><!-- ============================================================= FOOTER ============================================================= -->
+
+{include file='layout/footer'}
+<!-- ============================================================= FOOTER : END ============================================================= -->	</div><!-- /.wrapper -->
+
+	<!-- JavaScripts placed at the end of the document so the pages load faster -->
+	<script src="__STATIC__/index/assets/js/jquery-1.10.2.min.js"></script>
+	<script src="__STATIC__/index/assets/js/jquery-migrate-1.2.1.js"></script>
+	<script src="__STATIC__/index/assets/js/bootstrap.min.js"></script>
+	<script src="__STATIC__/index/assets/js/gmap3.min.js"></script>
+	<script src="__STATIC__/index/assets/js/bootstrap-hover-dropdown.min.js"></script>
+	<script src="__STATIC__/index/assets/js/owl.carousel.min.js"></script>
+	<script src="__STATIC__/index/assets/js/css_browser_selector.min.js"></script>
+	<script src="__STATIC__/index/assets/js/echo.min.js"></script>
+	<script src="__STATIC__/index/assets/js/jquery.easing-1.3.min.js"></script>
+	<script src="__STATIC__/index/assets/js/bootstrap-slider.min.js"></script>
+    <script src="__STATIC__/index/assets/js/jquery.raty.min.js"></script>
+    <script src="__STATIC__/index/assets/js/jquery.prettyPhoto.min.js"></script>
+    <script src="__STATIC__/index/assets/js/jquery.customSelect.min.js"></script>
+    <script src="__STATIC__/index/assets/js/wow.min.js"></script>
+	<script src="__STATIC__/index/assets/js/scripts.js"></script>
+    <script>
+        $(function () {
+            var order_goods_price = $('.order_goods_price');
+            var all_goods_price = 0;
+            $(order_goods_price).each(function (k,v) {
+                var price = parseFloat($(v).html());
+                all_goods_price += price;
+            });
+            $('#all_goods_price').html(all_goods_price);
+            $('#all_order_price').html(all_goods_price + 10);
+        })
+    </script>
+
+</body>
+</html>

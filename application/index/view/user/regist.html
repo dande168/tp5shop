@@ -1,0 +1,109 @@
+{include file='layout/header2'}
+<!-- ============================================================= HEADER : END ============================================================= -->
+	
+<!-- ========================================= MAIN ========================================= -->
+<main id="authentication" class="inner-bottom-md">
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-md-6" style="position:relative;left:30%;">
+				<section class="section sign-in inner-right-xs">
+					<h2 class="bordered">注册</h2>
+					<p>已有账号 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='{:url("login")}'>直接登录</a></p>
+
+					<form action="{:url('regist')}" method="post" class="login-form cf-style-1">
+						<div class="field-row">
+                            <label>账号</label>
+                            <input type="text" class="le-input" name="user_name">
+                        </div><!-- /.field-row -->
+
+                        <div class="field-row">
+                            <label>密码</label>
+                            <input type="password" class="le-input" name="user_pass">
+                        </div><!-- /.field-row -->
+						
+						<div class="field-row">
+                            <label>确认密码</label>
+                            <input type="password" class="le-input" name="re_user_pass">
+                        </div><!-- /.field-row -->
+						
+						<div class="field-row">
+                            <label>邮箱</label>
+                            <input type="email" class="le-input" name="email">
+                        </div><!-- /.field-row -->
+						
+						<div class="field-row">
+                            <label>验证码</label>
+                            <input type="text" name="ca_code" class="le-input" style="width:50%">
+							<img id="changeCa" src="{:url('getCaptcha')}"/>
+                        </div><!-- /.field-row -->
+
+                        <div class="buttons-holder">
+                            <button type="submit" class="le-button huge">立即注册</button>
+                        </div><!-- /.buttons-holder -->
+					</form><!-- /.cf-style-1 -->
+
+				</section><!-- /.sign-in -->
+			</div><!-- /.col -->
+
+			<!-- <div class="col-md-6"> -->
+				<!-- <section class="section register inner-left-xs"> -->
+					<!-- <h2 class="bordered">Create New Account</h2> -->
+					<!-- <p>Create your own Media Center account</p> -->
+
+					<!-- <form role="form" class="register-form cf-style-1"> -->
+						<!-- <div class="field-row"> -->
+                            <!-- <label>Email</label> -->
+                            <!-- <input type="text" class="le-input"> -->
+                        <!-- </div>-->
+
+                        <!-- <div class="buttons-holder"> -->
+                            <!-- <button type="submit" class="le-button huge">Sign Up</button> -->
+                        <!-- </div>-->
+					<!-- </form> -->
+
+					<!-- <h2 class="semi-bold">Sign up today and you'll be able to :</h2> -->
+
+					<!-- <ul class="list-unstyled list-benefits"> -->
+						<!-- <li><i class="fa fa-check primary-color"></i> Speed your way through the checkout</li> -->
+						<!-- <li><i class="fa fa-check primary-color"></i> Track your orders easily</li> -->
+						<!-- <li><i class="fa fa-check primary-color"></i> Keep a record of all your purchases</li> -->
+					<!-- </ul> -->
+
+				<!-- </section> -->
+
+			<!-- </div> -->
+
+		</div><!-- /.row -->
+	</div><!-- /.container -->
+</main><!-- /.authentication -->
+<!-- ========================================= MAIN : END ========================================= -->		
+<!-- ============================================================= FOOTER ============================================================= -->
+{include file='layout/footer'}
+<!-- ============================================================= FOOTER : END ============================================================= -->	</div><!-- /.wrapper -->
+
+	<!-- JavaScripts placed at the end of the document so the pages load faster -->
+	<script src="__STATIC__/index/assets/js/jquery-1.10.2.min.js"></script>
+	<script src="__STATIC__/index/assets/js/jquery-migrate-1.2.1.js"></script>
+	<script src="__STATIC__/index/assets/js/bootstrap.min.js"></script>
+	<script src="__STATIC__/index/assets/js/gmap3.min.js"></script>
+	<script src="__STATIC__/index/assets/js/bootstrap-hover-dropdown.min.js"></script>
+	<script src="__STATIC__/index/assets/js/owl.carousel.min.js"></script>
+	<script src="__STATIC__/index/assets/js/css_browser_selector.min.js"></script>
+	<script src="__STATIC__/index/assets/js/echo.min.js"></script>
+	<script src="__STATIC__/index/assets/js/jquery.easing-1.3.min.js"></script>
+	<script src="__STATIC__/index/assets/js/bootstrap-slider.min.js"></script>
+    <script src="__STATIC__/index/assets/js/jquery.raty.min.js"></script>
+    <script src="__STATIC__/index/assets/js/jquery.prettyPhoto.min.js"></script>
+    <script src="__STATIC__/index/assets/js/jquery.customSelect.min.js"></script>
+    <script src="__STATIC__/index/assets/js/wow.min.js"></script>
+	<script src="__STATIC__/index/assets/js/scripts.js"></script>
+    <script>
+        $("#changeCa").click(function () {
+            $url = "{:url('getCaptcha')}?id="+Math.random();
+            $(this).attr('src',$url);
+        });
+    </script>
+
+</body>
+</html>

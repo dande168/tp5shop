@@ -1,0 +1,210 @@
+<?php
+    //获取推荐商品
+    $goods_tj_data = model('Goods')->is_tj();
+    //获取热卖商品
+    $goods_hot_data = model('Goods')->is_hot();
+    //获取最新商品
+    $goods_new_data = model('Goods')->is_new();
+    //获取促销商品
+    $goods_cx_data = model('Goods')->is_cx();
+
+?>
+<footer id="footer" class="color-bg">
+
+    <div class="container">
+        <div class="row no-margin widgets-row">
+            <div class="col-xs-12  col-sm-4 no-margin-left">
+                <!-- ============================================================= FEATURED PRODUCTS ============================================================= -->
+                <div class="widget">
+                    <h2>推荐商品</h2>
+                    <div class="body">
+                        <ul>
+                            {foreach $goods_tj_data as $k=>$v}
+                            <li>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-9 no-margin">
+                                        <a href="{:url('Goods/lst',['id'=>$v.id])}">{$v.goods_name}</a>
+                                        <div class="price">
+                                            <div class="price-prev">￥{$v.price}</div>
+                                            <div class="price-current">￥{if $v['is_cx'] == 1}{$v['cx_price']}{else/}{$v['price']}{/if}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-3 no-margin">
+                                        <a href="{:url('Goods/lst',['id'=>$v.id])}" class="thumb-holder">
+                                            <img alt="电脑" src="{$v.small_pic}" data-echo="{$v.small_pic}" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            {/foreach}
+                        </ul>
+                    </div><!-- /.body -->
+                </div> <!-- /.widget -->
+                <!-- ============================================================= FEATURED PRODUCTS : END ============================================================= -->            </div><!-- /.col -->
+
+            <div class="col-xs-12 col-sm-4 ">
+                <!-- ============================================================= ON SALE PRODUCTS ============================================================= -->
+                <div class="widget">
+                    <h2>热卖商品</h2>
+                    <div class="body">
+                        <ul>
+                            {foreach $goods_hot_data as $k=>$v}
+                            <li>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-9 no-margin">
+                                        <a href="{:url('Goods/lst',['id'=>$v.id])}">{$v.goods_name}</a>
+                                        <div class="price">
+                                            <div class="price-prev">￥{$v.price}</div>
+                                            <div class="price-current">￥{if $v['is_cx'] == 1}{$v['cx_price']}{else/}{$v['price']}{/if}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-3 no-margin">
+                                        <a href="{:url('Goods/lst',['id'=>$v.id])}" class="thumb-holder">
+                                            <img alt="电脑" src="{$v.small_pic}" data-echo="{$v.small_pic}" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            {/foreach}
+                        </ul>
+                    </div><!-- /.body -->
+                </div> <!-- /.widget -->
+                <!-- ============================================================= ON SALE PRODUCTS : END ============================================================= -->            </div><!-- /.col -->
+
+            <div class="col-xs-12 col-sm-4 ">
+                <!-- ============================================================= TOP RATED PRODUCTS ============================================================= -->
+                <div class="widget">
+                    <h2>最新商品</h2>
+                    <div class="body">
+                        <ul>
+                            {foreach $goods_new_data as $k=>$v}
+                            <li>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-9 no-margin">
+                                        <a href="{:url('Goods/lst',['id'=>$v.id])}">{$v.goods_name}</a>
+                                        <div class="price">
+                                            <div class="price-prev">￥{$v.price}</div>
+                                            <div class="price-current">￥{if $v['is_cx'] == 1}{$v['cx_price']}{else/}{$v['price']}{/if}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-3 no-margin">
+                                        <a href="{:url('Goods/lst',['id'=>$v.id])}" class="thumb-holder">
+                                            <img alt="电脑" src="{$v.small_pic}" data-echo="{$v.small_pic}" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            {/foreach}
+                        </ul>
+                    </div><!-- /.body -->
+                </div><!-- /.widget -->
+                <!-- ============================================================= TOP RATED PRODUCTS : END ============================================================= -->            </div><!-- /.col -->
+
+        </div><!-- /.widgets-row-->
+    </div><!-- /.container -->
+
+    <div class="sub-form-row">
+        <!--<div class="container">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 no-padding">
+                <form role="form">
+                    <input placeholder="Subscribe to our newsletter">
+                    <button class="le-button">Subscribe</button>
+                </form>
+            </div>
+        </div>--><!-- /.container -->
+    </div><!-- /.sub-form-row -->
+
+    <div class="link-list-row">
+        <div class="container no-padding">
+            <div class="col-xs-12 col-md-4 ">
+                <!-- ============================================================= CONTACT INFO ============================================================= -->
+                <div class="contact-info">
+                    <div class="footer-logo">
+                        <img alt="logo" src="__STATIC__/index/assets/images/logo.PNG" width="233" height="54"/>
+                    </div><!-- /.footer-logo -->
+
+                    <p class="regular-bold"> 请通过电话，电子邮件随时联系我们</p>
+
+                    <p>
+                        福源大厦9楼, 厦门市思明区, 中国
+                        <br>布塔信息科技
+                    </p>
+
+                    <!--<div class="social-icons">
+                        <h3>Get in touch</h3>
+                        <ul>
+                            <li><a href="http://facebook.com/transvelo" class="fa fa-facebook"></a></li>
+                            <li><a href="#" class="fa fa-twitter"></a></li>
+                            <li><a href="#" class="fa fa-pinterest"></a></li>
+                            <li><a href="#" class="fa fa-linkedin"></a></li>
+                            <li><a href="#" class="fa fa-stumbleupon"></a></li>
+                            <li><a href="#" class="fa fa-dribbble"></a></li>
+                            <li><a href="#" class="fa fa-vk"></a></li>
+                        </ul>
+                    </div>--><!-- /.social-icons -->
+
+                </div>
+                <!-- ============================================================= CONTACT INFO : END ============================================================= -->            </div>
+
+            <div class="col-xs-12 col-md-8 no-margin">
+                <!-- ============================================================= LINKS FOOTER ============================================================= -->
+                <div class="link-widget">
+                    <div class="widget">
+                        <h3>最新商品</h3>
+                        {foreach $goods_new_data as $k=>$v}
+                        <ul>
+                            <li><a href="#">{$v.goods_name}</a></li>
+                        </ul>
+                        {/foreach}
+                    </div><!-- /.widget -->
+                </div><!-- /.link-widget -->
+
+                <div class="link-widget">
+                    <div class="widget">
+                        <h3>热门商品</h3>
+                        {foreach $goods_hot_data as $k=>$v}
+                        <ul>
+                            <li><a href="#">{$v.goods_name}</a></li>
+                        </ul>
+                        {/foreach}
+                    </div><!-- /.widget -->
+                </div><!-- /.link-widget -->
+
+                <div class="link-widget">
+                    <div class="widget">
+                        <h3>促销商品</h3>
+                        {foreach $goods_cx_data as $k=>$v}
+                        <ul>
+                            <li><a href="#">{$v.goods_name}</a></li>
+                        </ul>
+                        {/foreach}
+                    </div><!-- /.widget -->
+                </div><!-- /.link-widget -->
+                <!-- ============================================================= LINKS FOOTER : END ============================================================= -->            </div>
+        </div><!-- /.container -->
+    </div><!-- /.link-list-row -->
+
+    <div class="copyright-bar">
+        <div class="container">
+            <div class="col-xs-12 col-sm-6 no-margin">
+                <div class="copyright">
+                    &copy; <a href="#">buta.com</a> - all rights reserved
+                </div><!-- /.copyright -->
+            </div>
+            <div class="col-xs-12 col-sm-6 no-margin">
+                <div class="payment-methods ">
+                    <ul>
+                        <li><img alt="" src="__STATIC__/index/assets/images/payments/payment-visa.png"></li>
+                        <li><img alt="" src="__STATIC__/index/assets/images/payments/payment-master.png"></li>
+                        <li><img alt="" src="__STATIC__/index/assets/images/payments/payment-paypal.png"></li>
+                        <li><img alt="" src="__STATIC__/index/assets/images/payments/payment-skrill.png"></li>
+                    </ul>
+                </div><!-- /.payment-methods -->
+            </div>
+        </div><!-- /.container -->
+    </div><!-- /.copyright-bar -->
+
+</footer><!-- /#footer -->

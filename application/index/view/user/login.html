@@ -1,0 +1,137 @@
+{include file='layout/header2'}
+<!-- ============================================================= HEADER : END ============================================================= -->
+	
+<!-- ========================================= MAIN ========================================= -->
+<main id="authentication" class="inner-bottom-md">
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-md-6" style="position:relative;left:30%;">
+				<section class="section sign-in inner-right-xs">
+					<h2 class="bordered">登录</h2>
+					<p>欢迎您回来，请您输入您的账户名密码 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='{:url("regist")}'>未注册？</a></p>
+
+					<form action="{:url('login')}" method="post" role="form" class="login-form cf-style-1">
+						<div class="field-row">
+                            <label>账号</label>
+                            <input type="text" class="le-input" name="user_name">
+                        </div><!-- /.field-row -->
+
+                        <div class="field-row">
+                            <label>密码</label>
+                            <input type="password" class="le-input" name="user_pass">
+                        </div><!-- /.field-row -->
+
+                        <div class="field-row clearfix">
+                        	<span class="pull-left">
+                        		<label class="content-color"><input type="checkbox" class="le-checbox auto-width inline"> <span class="bold">记住我</span></label>
+                        	</span>
+                        	<span class="pull-right">
+                        		<a href="#" class="content-color bold">忘记密码?</a>
+                        	</span>
+                        </div>
+
+                        <div class="buttons-holder">
+                            <button type="submit" class="le-button huge">安全登录</button>
+                        </div><!-- /.buttons-holder -->
+					</form><!-- /.cf-style-1 -->
+
+				</section><!-- /.sign-in -->
+			</div><!-- /.col -->
+
+			<!-- <div class="col-md-6"> -->
+				<!-- <section class="section register inner-left-xs"> -->
+					<!-- <h2 class="bordered">Create New Account</h2> -->
+					<!-- <p>Create your own Media Center account</p> -->
+
+					<!-- <form role="form" class="register-form cf-style-1"> -->
+						<!-- <div class="field-row"> -->
+                            <!-- <label>Email</label> -->
+                            <!-- <input type="text" class="le-input"> -->
+                        <!-- </div>-->
+
+                        <!-- <div class="buttons-holder"> -->
+                            <!-- <button type="submit" class="le-button huge">Sign Up</button> -->
+                        <!-- </div>-->
+					<!-- </form> -->
+
+					<!-- <h2 class="semi-bold">Sign up today and you'll be able to :</h2> -->
+
+					<!-- <ul class="list-unstyled list-benefits"> -->
+						<!-- <li><i class="fa fa-check primary-color"></i> Speed your way through the checkout</li> -->
+						<!-- <li><i class="fa fa-check primary-color"></i> Track your orders easily</li> -->
+						<!-- <li><i class="fa fa-check primary-color"></i> Keep a record of all your purchases</li> -->
+					<!-- </ul> -->
+
+				<!-- </section> -->
+
+			<!-- </div> -->
+
+		</div><!-- /.row -->
+	</div><!-- /.container -->
+</main><!-- /.authentication -->
+<!-- ========================================= MAIN : END ========================================= -->		
+<!-- ============================================================= FOOTER ============================================================= -->
+{include file='layout/footer'}
+<!-- ============================================================= FOOTER : END ============================================================= -->	</div><!-- /.wrapper -->
+
+	<!-- JavaScripts placed at the end of the document so the pages load faster -->
+	<script src="__STATIC__/index/assets/js/jquery-1.10.2.min.js"></script>
+	<script src="__STATIC__/index/assets/js/jquery-migrate-1.2.1.js"></script>
+	<script src="__STATIC__/index/assets/js/bootstrap.min.js"></script>
+	<script src="__STATIC__/index/assets/js/gmap3.min.js"></script>
+	<script src="__STATIC__/index/assets/js/bootstrap-hover-dropdown.min.js"></script>
+	<script src="__STATIC__/index/assets/js/owl.carousel.min.js"></script>
+	<script src="__STATIC__/index/assets/js/css_browser_selector.min.js"></script>
+	<script src="__STATIC__/index/assets/js/echo.min.js"></script>
+	<script src="__STATIC__/index/assets/js/jquery.easing-1.3.min.js"></script>
+	<script src="__STATIC__/index/assets/js/bootstrap-slider.min.js"></script>
+    <script src="__STATIC__/index/assets/js/jquery.raty.min.js"></script>
+    <script src="__STATIC__/index/assets/js/jquery.prettyPhoto.min.js"></script>
+    <script src="__STATIC__/index/assets/js/jquery.customSelect.min.js"></script>
+    <script src="__STATIC__/index/assets/js/wow.min.js"></script>
+	<script src="__STATIC__/index/assets/js/scripts.js"></script>
+    <script>
+        $("#createlink").click(function(){
+            $(".billing-address").slideDown();
+        });
+        $(".minus").click(function(){
+            var cartid = $("input[name=productnum]").attr('id');
+            var num = parseInt($("input[name=productnum]").val()) - 1;
+            if (parseInt($("input[name=productnum]").val()) <= 1) {
+                var num = 1;
+            }
+            var total = parseFloat($(".value.pull-right span").html());
+            var price = parseFloat($(".price span").html());
+            changeNum(cartid, num);
+            var p = total - price;
+            if (p < 0) {
+                var p = "0";
+            }
+            $(".value.pull-right span").html(p + "");
+            $(".value.pull-right.ordertotal span").html(p + "");
+        });
+        $(".plus").click(function(){
+            var cartid = $("input[name=productnum]").attr('id');
+            var num = parseInt($("input[name=productnum]").val()) + 1;
+            var total = parseFloat($(".value.pull-right span").html());
+            var price = parseFloat($(".price span").html());
+            changeNum(cartid, num);
+            var p = total + price;
+            $(".value.pull-right span").html(p + "");
+            $(".value.pull-right.ordertotal span").html(p + "");
+        });
+
+        var total = parseFloat($("#total span").html());
+        $(".le-radio.express").click(function(){
+            var ototal = parseFloat($(this).attr('data')) + total;
+            $("#ototal span").html(ototal);
+        });
+        $("input.address").click(function(){
+            var addressid = $(this).val();
+            $("input[name=addressid]").val(addressid);
+        });
+    </script>
+
+</body>
+</html>

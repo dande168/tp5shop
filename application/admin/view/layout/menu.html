@@ -1,0 +1,22 @@
+<?php
+	$menu_data = model('Auth')->menu();
+?>
+
+<aside class="Hui-aside">
+	<div class="menu_dropdown bk_2">
+		{foreach $menu_data as $k=>$v}
+		<dl id="menu-article">
+			<dt><i class="Hui-iconfont">&#xe616;</i> {$v.auth_name}<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					{foreach $v['child'] as $k1=>$v1}
+					<?php $path = $v1['auth_c'].'/'.$v1['auth_f'];?>
+					<li><a href="{:url($path)}" title="{$v1.auth_name}">{$v1.auth_name}</a></li>
+					{/foreach}
+				</ul>
+			</dd>
+		</dl>
+		{/foreach}
+	</div>
+</aside>
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>

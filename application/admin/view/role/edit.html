@@ -1,0 +1,121 @@
+<!--_meta 作为公共模版分离出去-->
+
+{include file='layout/meta'}
+
+<!--/meta 作为公共模版分离出去-->
+
+<title>编辑角色 - 角色管理 - H-ui.admin v3.0</title>
+<meta name="keywords" content="H-ui.admin v3.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+<meta name="description" content="H-ui.admin v3.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+</head>
+<body>
+
+<!--_header 作为公共模版分离出去-->
+{include file='layout/header'}
+<!--/_header 作为公共模版分离出去-->
+
+<!--_menu 作为公共模版分离出去-->
+{include file='layout/menu'}
+<!--/_menu 作为公共模版分离出去-->
+
+<section class="Hui-article-box">
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+		<span class="c-gray en">&gt;</span>
+		角色管理
+		<span class="c-gray en">&gt;</span>
+		编辑角色 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+	</nav>
+	<article class="cl pd-20">
+		<form action="{:url('edit')}" method="post" class="form form-horizontal" id="form-admin-add">
+			<input type="hidden" name="id" value="{$data.id}">
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>角色名称：</label>
+				<div class="formControls col-xs-8 col-sm-5">
+					<input type="text" class="input-text" value="{$data.role_name}" placeholder="" id="role_name" name="role_name">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>排序：</label>
+				<div class="formControls col-xs-8 col-sm-5">
+					<input type="text" class="input-text" value="{$data.orders}" placeholder="" id="orders" name="orders">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>权限：</label>
+				<div class="formControls col-xs-8 col-sm-5">
+					{foreach $auth_data as $k=>$v}
+						<!--substr_count 取字符串在另一个字符串中出现的个数-->
+						<?php echo str_repeat('------',substr_count($v['ids_path'],','));?>
+						<input level="{$v.ids_path|substr_count=###,','}" type="checkbox" value="{$v.id}" name="auth_ids[]" {if strpos(','.$data.auth_ids.',',','.$v.id.',') !== false }checked{/if}  class="valid"> {$v.auth_name}<br/>
+					{/foreach}
+				</div>
+			</div>
+			<div class="row cl">
+				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+					<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+				</div>
+			</div>
+		</form>
+	</article>
+</section>
+<!--_footer 作为公共模版分离出去-->
+{include file='layout/footer'}
+<!--/_footer /作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__STATIC__/admin/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+});
+
+$("input:checkbox").click(function () {
+    //获取当前点击的选择框的level值
+	var current_level = $(this).attr('level');
+	//当点击选中的时候
+	if($(this).prop('checked')){
+	    var temp_level = current_level;
+	    //获取当前的所有前面的同级的input选择框
+		var prev_all = $(this).prevAll("input:checkbox");
+		//循环为上一级加上选择
+		$(prev_all).each(function (k,v) {
+			if($(v).attr('level') < temp_level){
+				$(v).prop('checked',true);
+				temp_level--;
+			}
+        });
+		//获取当前的所有后面的同级的input框
+		var next_all = $(this).nextAll('input:checkbox');
+		$(next_all).each(function (k,v) {
+		    //循环判断当前选中的下级
+			if($(v).attr('level') > current_level){
+				$(v).prop('checked',true);
+			}else{
+			    //若不是下级了，直接停止循环
+			    return false;
+			}
+        })
+	}else{
+        //获取当前的所有后面的同级的input框
+        var next_all = $(this).nextAll('input:checkbox');
+        $(next_all).each(function (k,v) {
+            //循环判断当前选中的下级
+            if($(v).attr('level') > current_level){
+                $(v).prop('checked',false);
+            }else{
+                //若不是下级了，直接停止循环
+                return false;
+            }
+        })
+	}
+});
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>
